@@ -1,7 +1,8 @@
 
 /*
 
-        Write a program which reverse each element of  singly linear linked list.
+        Write a program which will display largest digits of all element from singly linear 
+        linked list.
 
 
 */
@@ -39,16 +40,6 @@ void InsertFirst(PPNODE Head,int No)
        *Head=newn; 
     }
 }
-int Count(PNODE Head)
-{
-    int iCount=0;
-    while(Head!=NULL)
-    {
-        iCount++;
-        Head=Head->next;
-    }
-    return iCount;
-}
 
 
 
@@ -63,36 +54,58 @@ void Display(PNODE Head)
     }
     printf("NULL\n");
 }
-
-void Reverse(PNODE Head)
+int Count(PNODE Head)
 {
-    printf("Linked List after making each element reverse : ");
+    int iCount=0;
+    while(Head!=NULL)
+    {
+        iCount++;
+        Head=Head->next;
+    }
+    return iCount;
+}
 
+void DisplayLargest(PNODE Head)
+{
+    printf("Largest of digit of each  element  in linklist are : \n");
     int iLength=0;
-    iLength=Count(Head);
     int iCnt=0;
-
     int iDigit=0;
-    int iReverse=0;
+    int iLargest=0;
+    iLength=Count(Head);
+
+    int iNo=0;
     int iNo1=0;
-    int iNo2=0;
+
     PNODE temp=Head;
     for(iCnt=1;iCnt<=iLength;iCnt++)
     {
-        iNo1=temp->data;
-        iNo2=iNo1;
-        while(iNo2!=0)
+        iNo=temp->data;
+        iNo1=iNo;
+        iLargest=0;
+
+        while(iNo1!=0)
         {
-            iDigit=iNo2%10;
-            iReverse=(iReverse *10)+iDigit;
-            iNo2=iNo2/10;
+
+            iDigit=(iNo1)%10;
+            if(iDigit>iLargest)
+            {
+                iLargest=iDigit;
+                
+            }
+
+            iNo1=(iNo1)/10;
         }
-        printf("| %d |->",iReverse);
-
-
-        temp=temp->next;
-        iReverse=0;
+        printf("%d\t",iLargest);
+       
+         temp=temp->next;
+         
     }
+
+    
+    
+
+  
 }
 
 
@@ -103,25 +116,24 @@ int main()
     int iRet=0;
 
     
-    InsertFirst(&First,89);
-    InsertFirst(&First,6);
+    InsertFirst(&First,419);
+    InsertFirst(&First,532);
 
-    InsertFirst(&First,41);
+    InsertFirst(&First,250);
 
-    InsertFirst(&First,17);
-    InsertFirst(&First,28);
+    
     InsertFirst(&First,11);
-    
+
     iRet=Count(First);
-    printf("Number of elements in linkedlist are : %d\n",iRet);
-    
-
+    printf("Number of elements in linkedlist are : %d",iRet);
     
 
     Display(First);
-    Reverse(First);
-    
+    DisplayLargest(First);
+
     Display(First);
+
+
     
     
    
